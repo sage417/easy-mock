@@ -28,6 +28,8 @@ const serve = (pf, filePath, cache) => staticCache(resolve(filePath), {
   maxAge: cache && isProd ? 60 * 60 * 24 * 30 : 0
 })
 
+const client = require('./eureka/eureka-client')
+
 validate(app)
 
 const requestLogger = isProd
@@ -74,3 +76,7 @@ app
 if (!module.parent) {
   app.listen(config.get('port'))
 }
+
+client.start(function(error){
+  console.log(error || 'complete');
+});

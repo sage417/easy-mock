@@ -65,7 +65,8 @@
     "vue-server-renderer": "^2.4.2",
     "vue-shortkey": "^2.2.1",
     "vuex": "^2.3.1",
-    "vuex-router-sync": "^4.2.0"
+    "vuex-router-sync": "^4.2.0",
+    "eureka-js-client": "^4.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
