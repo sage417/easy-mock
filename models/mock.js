@@ -11,6 +11,7 @@ const schema = new Schema({
   },
   description: String,
   mode: String,
+  operationId: String,
   url: String,
   method: String,
   parameters: String,

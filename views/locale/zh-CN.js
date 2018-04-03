@@ -168,7 +168,7 @@ export default {
         { category: '导航' },
         { category: '操作', list: ['创建接口', '添加 / 移除工作台', '同步 Swagger'] }
       ],
-      columns: ['描述', '操作'],
+      columns: ['描述', '操作', '请求'],
       action: ['预览接口', '编辑接口', '复制接口地址', '克隆', '删除'],
       copySuccess: '接口地址已复制到剪贴板',
       syncSwagger: {
@@ -193,9 +193,10 @@ export default {
       expand: {
         description: '描述',
         tab: ['请求参数', '响应参数'],
-        columnsRequest: ['参数名', '描述', '参数类型', '数据类型'],
+        columnsRequest: ['参数名', '描述', '参数类型', '数据类型', '是否必须', '默认值'],
         columnsResponse: ['状态码', '描述'],
-        defaultDescription: '太懒了，居然不写描述'
+        defaultDescription: '太懒了，居然不写描述',
+        required: ['是', '否']
       },
       editor: {
         title: ['更新接口', '创建接口'],

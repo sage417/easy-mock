@@ -8,14 +8,15 @@
   bottom: 0;
   z-index: 999;
   display: flex;
-  overflow: hidden;
+  flex-direction: column-reverse;
+  overflow: scroll;
 
-  & > div {
-    height: 100%;
+& > div {
     flex: 1;
   }
 
   .em-editor__editor {
+    min-height: 400px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -26,7 +27,7 @@
   }
 
   & > div:last-child {
-    flex: 0 0 350px;
+    flex: 0 0 auto;
   }
 
   .panel-info {
@@ -49,6 +50,25 @@
 
     .wrapper {
       width: 100%;
+    }
+
+    .input-wrapper {
+      display: inline-block;
+      user-select: none;
+      width: 100%;
+
+      div {
+        display: inline-block;
+      }
+
+      .input-edit-icon {
+        cursor: pointer;
+        display: none;
+      }
+
+      .label-wrapper:hover .input-edit-icon {
+        display: inline-block;
+      }
     }
   }
 

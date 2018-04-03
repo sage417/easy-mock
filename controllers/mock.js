@@ -56,8 +56,10 @@ module.exports = class MockController {
     const mode = ctx.checkBody('mode').notEmpty().value
     const projectId = ctx.checkBody('project_id').notEmpty().value
     const description = ctx.checkBody('description').notEmpty().value
+    const operationId = ctx.checkBody('operationId').notBlank().value
     const url = ctx.checkBody('url').notEmpty().match(/^\/.*$/i, 'URL 必须以 / 开头').value
     const method = ctx.checkBody('method').notEmpty().toLow().in(['get', 'post', 'put', 'delete', 'patch']).value
+    const parameters = ctx.checkBody('parameters').optional().isJSON('invalid parameters').value
 
     if (ctx.errors) {
       ctx.body = ctx.util.refail(null, 10001, ctx.errors)
@@ -84,10 +86,12 @@ module.exports = class MockController {
 
     await MockProxy.newAndSave({
       project: projectId,
+      operationId,
       description,
       method,
       url,
-      mode
+      mode,
+      parameters
     })
 
     await redis.del('project:' + projectId)
@@ -158,9 +162,11 @@ module.exports = class MockController {
     const uid = ctx.state.user.id
     const id = ctx.checkBody('id').notEmpty().value
     const mode = ctx.checkBody('mode').notEmpty().value
+    const operationId = ctx.checkBody('operationId').notBlank().value
     const description = ctx.checkBody('description').notEmpty().value
     const url = ctx.checkBody('url').notEmpty().match(/^\/.*$/i, 'URL 必须以 / 开头').value
     const method = ctx.checkBody('method').notEmpty().toLow().in(['get', 'post', 'put', 'delete', 'patch']).value
+    const parameters = ctx.checkBody('parameters').optional().isJSON('invalid parameters').value
 
     if (ctx.errors) {
       ctx.body = ctx.util.refail(null, 10001, ctx.errors)
@@ -176,10 +182,12 @@ module.exports = class MockController {
 
     const { api, project } = result
 
+    api.operationId = operationId
     api.url = url
     api.mode = mode
     api.method = method
     api.description = description
+    api.parameters = parameters
 
     const existMock = await MockProxy.findOne({
       _id: { $ne: api.id },

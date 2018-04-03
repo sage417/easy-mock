@@ -6,7 +6,7 @@
     <p>{{mock.url}}</p>
     <h2>{{$t('p.detail.expand.description')}}</h2>
     <p>{{mock.description}}</p>
-    <Tabs value="request" v-if="mock.parameters || mock.response_model">
+    <Tabs value="request" v-if="(mock.parameters && request.length) || mock.response_model">
       <Tab-pane :label="$t('p.detail.expand.tab[0]')" name="request" v-if="mock.parameters">
         <Table :columns="columnsRequest" :data="request"></Table>
       </Tab-pane>
@@ -58,9 +58,11 @@ export default {
           render: (h, params) => h(DataTypeExpand, { props: { data: params.row.parameter } })
         },
         { title: this.$t('p.detail.expand.columnsRequest[0]'), key: 'name' },
-        { title: this.$t('p.detail.expand.columnsRequest[1]'), key: 'description' },
+        { title: this.$t('p.detail.expand.columnsRequest[3]'), key: 'dataType' },
         { title: this.$t('p.detail.expand.columnsRequest[2]'), key: 'paramType' },
-        { title: this.$t('p.detail.expand.columnsRequest[3]'), key: 'dataType' }
+        { title: this.$t('p.detail.expand.columnsRequest[4]'), key: 'required' },
+        { title: this.$t('p.detail.expand.columnsRequest[5]'), key: 'default' },
+        { title: this.$t('p.detail.expand.columnsRequest[1]'), key: 'description' }
       ],
       columnsResponse: [
         {
@@ -81,7 +83,9 @@ export default {
         description: parameter.description || this.$t('p.detail.expand.defaultDescription'),
         paramType: parameter.in,
         dataType: this.getParamDataType(parameter),
-        parameter: parameter
+        parameter: parameter,
+        required: this.$t('p.detail.expand.required[0]'),
+        'default': parameter.schema.default
       }))
     },
     response () {

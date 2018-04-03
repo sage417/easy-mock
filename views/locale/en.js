@@ -168,7 +168,7 @@ export default {
         { category: 'Navigation' },
         { category: 'Action', list: ['Create new Mock', 'Add / Remove Work Station', 'Sync with Swagger'] }
       ],
-      columns: ['Description', 'Action'],
+      columns: ['Description', 'Action', 'Request'],
       action: ['Preview Mock', 'Edit Mock', 'Copy Mock Address', 'Copy', 'Delete'],
       copySuccess: 'Project address is in clipboard',
       syncSwagger: {
@@ -193,9 +193,10 @@ export default {
       expand: {
         description: 'Description',
         tab: ['Request Parameters', 'Response Parameters'],
-        columnsRequest: ['Parameter', 'Description', 'Parameter Type', 'Data Type'],
+        columnsRequest: ['Parameter', 'Description', 'Parameter Type', 'Data Type', 'Required', 'Default'],
         columnsResponse: ['Status Code', 'Description'],
-        defaultDescription: 'Too layz to inlude a description'
+        defaultDescription: 'Too layz to inlude a description',
+        required: ['是', '否']
       },
       editor: {
         title: ['Update Mock', 'Create New Mock'],

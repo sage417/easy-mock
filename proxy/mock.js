@@ -24,6 +24,7 @@ module.exports = class MockProxy {
       _id: mock.id
     }, {
       $set: {
+        operationId: mock.operationId,
         url: mock.url,
         mode: mock.mode,
         method: mock.method,
